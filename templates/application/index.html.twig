@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ApplicationController!{% endblock %}
+
+{% block body %}
+
+<div class="example-wrapper text-center">
+    <h1>Bienvenue à bord</h1>
+    <p>Location de voitures 24/24 et 7j/7</p>
+    <img src="{{ asset('img/upload/voiture-intro.jpg') }}" class="d-block w-100" alt="...">
+</div>
+
+     {% for cars in car %}
+
+    <div class="card mb-3 container my-4" style="max-width: 800px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="{{ asset('img/upload/' ~ cars.picture) }}" class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{ cars.brand}} {{ cars.model}}</h5>
+        <p class="card-text">{{ cars.description}}</p>
+        <p class="card-text">{{ cars.price}}</p>
+         <button class="btn btn-success">Réserver</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endfor %}
+
+{% endblock %}

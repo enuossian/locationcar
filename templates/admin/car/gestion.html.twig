@@ -1,0 +1,44 @@
+{% extends "base.html.twig" %}
+{% block title %} Gestion {% endblock %}
+{% block body %} 
+<div class="m-4">
+<table class="table table-dark table-striped">
+<thead>
+    <tr>
+
+        <th>Véhicule</th>
+        <th>Titre</th>
+        <th>Marque</th>
+        <th>Modele</th>
+        <th>Description</th>
+        <th>Photo</th>
+        <th>Prix</th>
+        <th>Date</th>
+        <th>Actions</th>
+    </tr>
+</thead>
+<tbody>
+    {% for car in cars %}
+        
+        <tr>
+            <td>{{ car.id }}</td>
+            <td>{{ car.title }}</td>
+            <td>{{ car.brand }}</td>
+            <td>{{ car.model }}</td>
+            <td>{{ car.description }}</td>
+            <td>{{ car.picture }}</td>
+            <td>{{ car.price }}</td>
+            <td>{{ car.registrationDate| date('d/m/Y à H:i:s')}}</td>
+            <td>
+            
+                <a href="{{ path('show_car', {id:car.id}) }}" class="bi bi-eye text-primary"></a>
+                <a href="{{ path('modif_car', {id:car.id}) }}" class="bi bi-pencil-square text-warning"></a>
+                <a href="{{ path('add_car', {id:car.id}) }}"  class="bi bi-plus-lg text-success" ></a>
+                <a href="{{ path('delete_car', {id:car.id}) }}" class="bi bi-trash3 text-danger"></a>
+            </td>
+        </tr>
+    {% endfor %}
+</tbody>
+</table>
+</div>
+{% endblock %}

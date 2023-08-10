@@ -1,0 +1,43 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<div class="container col-6">
+<h1 class="text-center my-4 text-primary-emphasis">
+    {% if editMode %}
+        Modifier
+    {% else %}
+        Ajouter
+    {% endif %}
+     une voiture</h1>
+    {{form_start(formCar, {
+        attr: {novalidate: 'novalidate'}
+        })}}
+        {{form_row(formCar.title, {
+            label: "Titre",
+            attr: {placeholder: "Le titre de l'annonce"}
+            })}}
+        {{form_row(formCar.brand, {
+            label: "Marque",
+            attr: {placeholder: "Marque"}
+        })}}
+        {{form_row(formCar.model, {
+            label: "Modèle",
+            attr: {placeholder: "Modele"}
+        })}}
+        {{form_row(formCar.description, {
+            label: "Description",
+            attr: {placeholder: "Description"}
+        })}}
+        {{form_row(formCar.picture, {
+            label: "Photo",
+            attr: {placeholder: ""}
+        })}}
+        {{form_row(formCar.price, {
+            label: "Prix",
+            attr: {placeholder: "Prix"}
+        })}}
+        {{form_row(formCar.registration_date)}}
+        <button class="btn btn-primary">Ajouter</button>
+    {{form_end(formCar)}}
+    </div>
+  {% endblock %}
