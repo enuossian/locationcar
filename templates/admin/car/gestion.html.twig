@@ -29,8 +29,7 @@
             <td>{{ car.picture }}</td>
             <td>{{ car.price }}</td>
             <td>{{ car.registrationDate| date('d/m/Y à H:i:s')}}</td>
-            <td>
-            
+            <td>            
                 <a href="{{ path('show_car', {id:car.id}) }}" class="bi bi-eye text-primary"></a>
                 <a href="{{ path('modif_car', {id:car.id}) }}" class="bi bi-pencil-square text-warning"></a>
                 <a href="{{ path('add_car', {id:car.id}) }}"  class="bi bi-plus-lg text-success" ></a>

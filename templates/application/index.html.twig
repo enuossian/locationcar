@@ -21,8 +21,8 @@
       <div class="card-body">
         <h5 class="card-title">{{ cars.brand}} {{ cars.model}}</h5>
         <p class="card-text">{{ cars.description}}</p>
-        <p class="card-text">{{ cars.price}}</p>
-         <button class="btn btn-success">Réserver</button>
+        <p class="card-text">{{ cars.price}} € </p>
+         <a class="btn btn-success" href="{{ path('show_car', {id:cars.id}) }}" role="button">Réserver</a>
       </div>
     </div>
   </div>

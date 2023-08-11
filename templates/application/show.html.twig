@@ -8,11 +8,28 @@
         <div class="card-header text-center"><img src="{{ asset('img/upload/' ~ car.picture )}}" class="card-img-top" alt="..."></div>
         <div class="card-body m-4">
             <h4 class="card-title text-center text-uppercase">{{ car.brand }} - {{ car.model }}</h4>
-            <p>Louez une belle {{ car.brand }} {{ car.model }} pour seulement {{ car.price }} €</p>
+            <p>Louez une belle {{ car.brand }} {{ car.model }} pour seulement {{ car.price }} €/jour</p>
             <p>{{ car.description }}</p>
             <p>{{ car.registrationDate|date('d/m/Y d/m/Y')}}</p>
-            <button type="button" class="btn btn-info p-2">Réserver</button>
         </div>
     </div>
+{% if app.user %}
 
+<div class="container col-6">
+    {{form_start(formReserv, {
+            attr: {novalidate: 'novalidate'}
+            })}}
+            {{form_row(formReserv.date_start, {
+                label: "Date de début",
+                attr: {placeholder: ""}
+                })}}
+            {{form_row(formReserv.date_end, {
+                label: "Date de fin",
+                attr: {placeholder: ""}
+            })}}
+            <button type="submit" class="btn btn-info p-2">Réserver</button>
+    {{form_end(formReserv)}}
+    
+</div>
+{% endif %}
 {% endblock %}

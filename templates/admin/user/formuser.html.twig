@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<div class="container col-6">
+<h1 class="text-center my-4 text-primary-emphasis">
+    {% if editMode %}
+        Modifier
+    {% else %}
+        Ajouter
+    {% endif %}
+     un utilisateur</h1>
+    {{form_start(formUser, {
+        attr: {novalidate: 'novalidate'}
+        })}}
+    {{form_end(formUser)}}
+    </div>
+  {% endblock %}

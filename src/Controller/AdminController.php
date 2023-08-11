@@ -3,8 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Car;
+use App\Entity\User;
+use App\Entity\Order;
 use App\Form\VoitureType;
 use App\Repository\CarRepository;
+use App\Form\RegistrationFormType;
+use App\Repository\UserRepository;
+use App\Repository\OrderRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -77,6 +82,50 @@ class AdminController extends AbstractController
        $manager->flush();
        return $this->redirectToRoute('gestion_car');
     }
-    
+    #[Route('/user/gestion', name: 'gestion_user')]
+    public function user(UserRepository $repo)
+    {
+        $users = $repo->findAll();
+        return $this->render('admin/user/gestion.html.twig', [
+            'users' => $users
+        ]);
+    }
+    #[Route('/user/delete/{id}', name: 'delete_user')]
+    public function delete_user(User $user,
+    EntityManagerInterface $manager)
+    {
+       $manager->remove($user);
+       $manager->flush();
+       return $this->redirectToRoute('gestion_user');
+    }
+    #[Route('/user/modifier/{id}', name:"modif_user")]
+    #[Route('/user/add', name: 'add_user')]
+    public function formUser(Request $req, EntityManagerInterface $manager, User $user = null, SluggerInterface $slugger): Response
+    {
+        if($user == null)
+        {
+            $user =  new User;
+        }
+        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form->handleRequest($req);
+        if($form->isSubmitted() && $form->isValid()) 
+        {            
+            $manager->persist($user);
+            $manager->flush();
+            return $this->redirectToRoute('gestion_user');
+        }
 
+        return $this->render('admin/user/formuser.html.twig', [
+            'formUser' => $form,
+            'editMode' => $user->getId() !== null
+        ]);
+    }
+    #[Route(path: '/order/gestion', name: 'order_gestion')]
+    public function order(OrderRepository $repo)
+    {
+        $orders = $repo->findAll();
+        return $this->render('/admin/user/gestionorder.html.twig', [
+            'orders' => $orders
+        ]);
+    }
 }
