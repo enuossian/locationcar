@@ -37,8 +37,11 @@
           <a class="nav-link" href="#">Mon compte</a>
         </li>        
         <li class="nav-item">
-          <a class="btn btn-danger" href="{{ path('app_logout') }}">Deconnexion</a>
+
+      <a href="{{ path('app_logout')}}" class="btn btn-outline-danger">Déconnexion</a>
+
         </li>
+         {% if is_granted('ROLE_ADMIN') %} 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">Backoffice</a>
           <div class="dropdown-menu">
@@ -46,8 +49,8 @@
             <a class="dropdown-item" href="{{ path('gestion_car')}}">Gestion des véhicules</a>
             <a class="dropdown-item" href="{{ path('gestion_user')}}">Gestion des membres</a>
             <a class="dropdown-item" href="#">Gestion des commandes</a>
-
         </li>
+        {% endif %}
       </ul>
     </div>
   </div>
